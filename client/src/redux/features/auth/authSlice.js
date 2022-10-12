@@ -59,8 +59,7 @@ export const getMe = createAsyncThunk('auth/loginUser', async () => {
     } catch (error) {
         console.log(error)
     }
-},
-)
+})
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -71,7 +70,7 @@ export const authSlice = createSlice({
             state.token = null
             state.isLoading = false
             state.status = null
-        }
+        },
     },
     extraReducers: {
         // Register user
@@ -123,5 +122,6 @@ export const authSlice = createSlice({
 })
 
 export const checkIsAuth = (state) => Boolean(state.auth.token)
+
 export const { logout } = authSlice.actions
 export default authSlice.reducer

@@ -11,7 +11,7 @@ export const register = async (req, res) => {
 
         if (isUsed) {                                   // если такой пользователь уже есть, завершаем регистрацию и отправляем сообщение
             return res.json({
-                message: 'Данный username уже занят.'
+                message: 'Данный username уже занят.',
             })
         }
 
@@ -35,20 +35,23 @@ export const register = async (req, res) => {
 
         res.json({
             newUser,
+            token,
             message: 'Регистрация прошла успешно!', // отправляем сообщение на фронтенд
         })
     } catch (error) {
         res.json({ message: 'Ошибка при создании пользователя.' })
     }
 }
+
 // Login user
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body
         const user = await User.findOne({ username })
+
         if (!user) {
             return res.json({
-                message: 'Такого юзера не существует.'
+                message: 'Такого юзера не существует.',
             })
         }
 
@@ -56,25 +59,28 @@ export const login = async (req, res) => {
 
         if (!isPasswordCorrect) {
             return res.json({
-                message: 'Неверный пароль.'
+                message: 'Неверный пароль.',
             })
         }
 
-        const token = jwt.sign({
-            id: user._id,
-        },
+        const token = jwt.sign(
+            {
+                id: user._id,
+            },
             process.env.JWT_SECRET,
             { expiresIn: '30d' },
         )
 
         res.json({
-            token, user, message: 'Вы вошли в систему.',
+            token,
+            user,
+            message: 'Вы вошли в систему.',
         })
-
     } catch (error) {
         res.json({ message: 'Ошибка при авторизации.' })
     }
 }
+
 // Get Me
 export const getMe = async (req, res) => {
     try {
@@ -82,13 +88,14 @@ export const getMe = async (req, res) => {
 
         if (!user) {
             return res.json({
-                message: 'Такого юзера не существует.'
+                message: 'Такого юзера не существует.',
             })
         }
 
-        const token = jwt.sign({
-            id: user._id,
-        },
+        const token = jwt.sign(
+            {
+                id: user._id,
+            },
             process.env.JWT_SECRET,
             { expiresIn: '30d' },
         )
@@ -97,7 +104,6 @@ export const getMe = async (req, res) => {
             user,
             token,
         })
-
     } catch (error) {
         res.json({ message: 'Нет доступа.' })
     }
