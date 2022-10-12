@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 export const Navbar = () => {
     return (
@@ -8,22 +9,31 @@ export const Navbar = () => {
             </span>
             <ul className="flex gap-8">
                 <li>
-                    <a
+                    <NavLink
+                        to={'/'}
                         href='/'
                         className="text-xs text-gray-400 hover:text-white"
-                    >Главная</a>
+                    >
+                        Главная
+                    </NavLink>
                 </li>
                 <li>
-                    <a
+                    <NavLink
+                        to={'/posts'}
                         href='/'
                         className="text-xs text-gray-400 hover:text-white"
-                    >Мои посты</a>
+                    >
+                        Мои посты
+                    </NavLink>
                 </li>
                 <li>
-                    <a
+                    <NavLink
+                        to={'/new'}
                         href='/'
                         className="text-xs text-gray-400 hover:text-white"
-                    >Добавить пост</a>
+                    >
+                        Добавить пост
+                    </NavLink>
                 </li>
             </ul>
 
