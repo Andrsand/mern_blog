@@ -19,12 +19,22 @@ export const createPost = createAsyncThunk(
     },
 )
 
+export const getAllPosts = createAsyncThunk('post/getAllPosts', async () => {
+    try {
+        const { data } = await axios.get('/posts')
+        return data
+    } catch (error) {
+
+    }
+})
+
 export const postSlice = createSlice({
     name: 'post',
     initialState,
     reducers: {},
     extraReducers: {
-        // Create Post
+
+        // Создание поста
         [createPost.pending]: (state) => {
             state.loading = true
         },
@@ -33,6 +43,19 @@ export const postSlice = createSlice({
             state.posts.push(action.payload)
         },
         [createPost.rejected]: (state) => {
+            state.loading = false
+        },
+
+        // Получение всех постов
+        [getAllPosts.pending]: (state) => {
+            state.loading = true
+        },
+        [getAllPosts.fulfilled]: (state, action) => {
+            state.loading = false
+            state.posts = action.payload.posts
+            state.popularPosts = action.payload.popularPosts
+        },
+        [getAllPosts.rejected]: (state) => {
             state.loading = false
         },
     },
