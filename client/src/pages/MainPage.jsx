@@ -4,6 +4,8 @@ import { PopularPosts } from '../components/PopularPosts'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllPosts } from '../redux/features/post/postSlice'
 
+
+
 export const MainPage = () => {
 
     const dispatch = useDispatch()
@@ -28,7 +30,7 @@ export const MainPage = () => {
                     {posts?.map((post, idx) => (
                         <PostItem key={idx} post={post} />
                     ))}
-                    <PostItem />
+
                 </div>
                 <div className='basis-1/5'>
                     <div className='text-xs uppercase text-white'>
