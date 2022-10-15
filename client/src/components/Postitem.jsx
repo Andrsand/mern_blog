@@ -10,7 +10,6 @@ export const PostItem = ({ post }) => {
                 Загрузка...
             </div>
         )
-
     }
     return (
         <Link to={`/${post._id}`}>
