@@ -28,6 +28,14 @@ export const getAllPosts = createAsyncThunk('post/getAllPosts', async () => {
     }
 })
 
+export const removePost = createAsyncThunk('post/removePost', async (id) => {
+    try {
+        const { data } = await axios.delete(`/posts/${id}`, id)
+    } catch (error) {
+        console.log(error)
+    }
+})
+return
 export const postSlice = createSlice({
     name: 'post',
     initialState,
@@ -58,6 +66,22 @@ export const postSlice = createSlice({
         [getAllPosts.rejected]: (state) => {
             state.loading = false
         },
+
+        // Удаление поста
+        [removePost.pending]: (state) => {
+            state.loading = true
+        },
+        [removePost.fulfilled]: (state, action) => {
+            state.loading = false
+            state.posts = state.posts.filter(
+                (post) => post._id !== action.payload._id,
+            )
+
+        },
+        [removePost.rejected]: (state) => {
+            state.loading = false
+        },
+
     },
 })
 

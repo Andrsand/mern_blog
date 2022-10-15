@@ -96,6 +96,7 @@ export const getMyPosts = async (req, res) => {
 
 
 // Remove Post
+
 export const removePost = async (req, res) => {
     try {
         const post = await Post.findByIdAndDelete(req.params.id)
