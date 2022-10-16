@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { getMe } from './redux/features/auth/authSlice.js'
 
-
 function App() {
   const dispatch = useDispatch()
 
